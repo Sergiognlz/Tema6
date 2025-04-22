@@ -21,11 +21,10 @@ public class EnterosPrincipal {
 		int cont = 0;
 		// variable media
 		double media = 0;
-		// try
-		try {
-			// creamos objeto escaner y le pasamos el filereader con la dirección del
-			// fichero
-			Scanner sc = new Scanner(new FileReader("src\\ejercicio2\\Enteros.txt"));
+
+		// try creamos objeto escaner y le pasamos el filereader con la dirección del
+		// fichero
+		try (Scanner sc = new Scanner(new FileReader("src\\ejercicio2\\Enteros.txt"))) {
 
 			// comprobamos que el fichero tiene números y va avanzando por entre los números
 			while (sc.hasNextDouble()) {
@@ -43,9 +42,6 @@ public class EnterosPrincipal {
 			System.out.println("Suma números: " + suma);
 			// imprimimos media
 			System.out.println("Media números: " + media);
-
-			// cerramos escaner
-			sc.close();
 
 			// capturamos la excepción
 		} catch (FileNotFoundException e) {

@@ -19,11 +19,9 @@ public class PrincipalNReales {
 		int cont = 0;
 		// variable media
 		double media = 0;
-// try 		
-		try {
-			// creamos objeto escaner y le pasamos el filereader con la dirección del
-			// fichero
-			Scanner sc = new Scanner(new FileReader("src\\ejercicio1\\NumerosReales.txt"));
+		
+		// try creamos objeto escaner y le pasamos el filereader con la dirección del
+		try (Scanner sc = new Scanner(new FileReader("src\\ejercicio1\\NumerosReales.txt"))) {
 
 			// comprobamos que el fichero tiene números y va avanzando por entre los números
 			while (sc.hasNextDouble()) {
@@ -42,13 +40,11 @@ public class PrincipalNReales {
 			// imprimimos media
 			System.out.println("Media números: " + media);
 
-			// cerramos escaner
-			sc.close();
-
 			// capturamos la excepción
 		} catch (FileNotFoundException e) {
 			// mensaje de error
 			System.out.println("El fichero no existe");
+
 		}
 
 	}
