@@ -1,16 +1,18 @@
-package ejercicio1;
+package ejercicio2;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-/*Crea con un editor el fichero de texto NumerosReales.txt en un paquete dentro del proyecto. 
- * Escribe en él una serie de números reales separados por espacios simples. 
- * Implementar un programa que acceda a NumerosReales.txt, lea los números y calcule la suma y la media aritmética, 
- * mostrando los resultados por pantalla.*/
+public class EnterosPrincipal {
+	/*
+	 * Crear con un editor el fichero de texto Enteros.txt en la carpeta del
+	 * proyecto y escribe en él una serie de números enteros separados por
+	 * secuencias de espacios y tabuladores, incluso en líneas distintas, tal como:
+	 */
 
-public class PrincipalNReales {
 	public static void main(String[] args) {
+
 		// creamos variable número
 		double num;
 		// creamos variable suma
@@ -19,11 +21,11 @@ public class PrincipalNReales {
 		int cont = 0;
 		// variable media
 		double media = 0;
-// try 		
+		// try
 		try {
 			// creamos objeto escaner y le pasamos el filereader con la dirección del
 			// fichero
-			Scanner sc = new Scanner(new FileReader("src\\ejercicio1\\NumerosReales.txt"));
+			Scanner sc = new Scanner(new FileReader("src\\ejercicio2\\Enteros.txt"));
 
 			// comprobamos que el fichero tiene números y va avanzando por entre los números
 			while (sc.hasNextDouble()) {
