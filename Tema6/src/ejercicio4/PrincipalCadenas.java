@@ -16,7 +16,7 @@ public class PrincipalCadenas {
 		// try catch , creamos el bufferwritter y le especificamos el paquete para que
 		// cree solo. Lo ponemos en el try para que cierre al salir. Ponemos true al
 		// final para que guarde todo y no solo sobreescriba
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio4\\fichero.txt", true))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio4\\Fichero.txt", true))) {
 
 			// pedimos al usuario que introduzca una cadena
 			System.out.println("Introduce una cadena. FIN para salir");
