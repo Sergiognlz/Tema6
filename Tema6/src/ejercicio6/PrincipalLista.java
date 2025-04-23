@@ -19,7 +19,7 @@ public class PrincipalLista {
 		List<Integer> listaNumeros = new ArrayList<>();
 
 		// try catch con el scanner y el filereader con la dirección del la lista1.
-		try (Scanner sc = new Scanner(new FileReader("\src\\ejercicio6\\Lista1.txt"))) {
+		try (Scanner sc = new Scanner(new FileReader("src\\ejercicio6\\Lista1.txt"))) {
 			// mientras haya números seguirá repitiendo
 			while (sc.hasNext()) {
 				//guardamos el número que leemos en la variable num
@@ -36,7 +36,7 @@ public class PrincipalLista {
 			System.out.println("Fichero no encontrado");
 			
 			//try catch con el buffer de escritura y la dirección de la lista 2, añadimos el append con el true para que concatene
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter("\src\\ejercicio6\\Lista2.txt", true))) {
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio6\\Lista2.txt", true))) {
 				//for each para recorrer la lista
 				for (int numero : listaNumeros) {
 					//guardamos el número en el fichero
