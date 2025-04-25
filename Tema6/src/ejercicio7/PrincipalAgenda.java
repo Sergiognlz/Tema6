@@ -34,41 +34,60 @@ public class PrincipalAgenda {
 			sc.nextLine();
 			// switch
 			switch (opcion) {
-
+			//caso 1: añadir nuevo contacto
 			case 1 -> {
-				// pedimos número
+				// pedimos nombre del contacto
 				System.out.println("Introduce el nombre");
+				//guardamos nombre del contacto
 				nombre = sc.nextLine();
+				//pedimos número del contacto
 				System.out.println("Introduce el número");
+				//guardamos número
 				num = sc.nextLong();
+				//limpiamos buffer
 				sc.nextLine();
-
+				//añadimos el contacto al mapa
 				añadirContacto(nombre, num);
 			}
+			//caso 2: buscar contacto por nobre
 			case 2 -> {
+				//pedimos nombre a buscar
 				System.out.println("Introduce el nombre a buscar");
+				//guardamos nombre
 				nombre = sc.nextLine();
+				//guardamos en número el número asociado al nombre en el mapa
 				num = agenda.get(nombre);
+				//si no existe el número porque no existe el nombre
 				if (num == null) {
+					//mensaje error
 					System.out.println("El contacto no existe");
+					//en caso de que exista
 				} else {
+					//imprimimos nombre y número
 					System.out.println(nombre + ": " + num);
 				}
 
 			}
+			//caso 3: mostrar todos los contactos de la agenda
 			case 3 -> {
+				//for each para recorrer el mapa. usamos el key para que tome las claves del mapa
 				for (String contacto : agenda.keySet()) {
+					//imprime contacto y su valor de agenda
 					System.out.println(contacto + ": " + agenda.get(contacto));
 				}
 
 			}
+			//caso 4 salir y escriber fichero
 			case 4 -> {
+				//llamamos a la función escribir fichero
 				escribeFichero();
-
-				System.out.println("Saliendo");
+				//immprimimos mensaje de salida
+				System.out.println("Guardando y Saliendo");
 
 			}
+			//caso default
 			default -> {
+				//mensaje error
 				System.out.println("La opción introducida no existe");
 			}
 			}
@@ -91,15 +110,22 @@ public class PrincipalAgenda {
 		System.out.println("Introduce la opción deseada");
 	}
 
+	/**
+	 * Función que añade contacto
+	 * @param nombre contacto
+	 * @param num contacto
+	 * @return exito
+	 */
 	public static boolean añadirContacto(String nombre, Long num) {
 		boolean exito = false;
-
+		//si el tamaño es menor de 20 y no  contiene el nombre a guardar
 		if (agenda.size() < 20 && !agenda.containsKey(nombre)) {
-
+			//guarda nombre y número en el mapa
 			agenda.put(nombre, num);
+			//exito será true
 			exito = true;
 		}
-
+		//devuelve éxito
 		return exito;
 	}
 
@@ -137,18 +163,23 @@ public class PrincipalAgenda {
 		}
 
 	}
-
+/**
+ * función que escribe los contactos del mapa en el fichero
+ */
 	public static void escribeFichero() {
 
 		// crea un fichero vacío en caso de que no exista
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio7\\Agenda.txt", true))) {
-
+			//for each para recorrer el mapa y nos quedamos con la clave de la agenda
 			for (String contacto : agenda.keySet()) {
+				//escribimos en el fichero contecto y el get del contacto, que será el número
 				bw.write(contacto + ": " + agenda.get(contacto));
+				//salto de línea
+				bw.newLine();
 				 
 			}
 
-			bw.flush();
+		
 		} catch (IOException e1) {
 			System.out.println("No se puede leer el fichero");
 		}
