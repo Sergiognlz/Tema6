@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class PrincipalAgenda {
 
 	// creamos mapa a nivel clase
-	public static TreeMap<String, Integer> agenda = new TreeMap<>();
+	public static TreeMap<String, Long> agenda = new TreeMap<>();
 
 	public static void main(String[] args) {
 		// objeto escaner
@@ -22,7 +22,7 @@ public class PrincipalAgenda {
 		// variable nombre
 		String nombre;
 		// variable número
-		Integer num;
+		Long num;
 
 		// repetimos interacciones
 		do {
@@ -40,7 +40,8 @@ public class PrincipalAgenda {
 				System.out.println("Introduce el nombre");
 				nombre = sc.nextLine();
 				System.out.println("Introduce el número");
-				num = sc.nextInt();
+				num = sc.nextLong();
+				sc.nextLine();
 
 				añadirContacto(nombre, num);
 			}
@@ -56,13 +57,19 @@ public class PrincipalAgenda {
 
 			}
 			case 3 -> {
+				for (String contacto : agenda.keySet()) {
+					System.out.println(contacto + ": " + agenda.get(contacto));
+				}
 
 			}
 			case 4 -> {
+				escribeFichero();
+
+				System.out.println("Saliendo");
 
 			}
 			default -> {
-
+				System.out.println("La opción introducida no existe");
 			}
 			}
 
@@ -84,7 +91,7 @@ public class PrincipalAgenda {
 		System.out.println("Introduce la opción deseada");
 	}
 
-	public static boolean añadirContacto(String nombre, int num) {
+	public static boolean añadirContacto(String nombre, Long num) {
 		boolean exito = false;
 
 		if (agenda.size() < 20 && !agenda.containsKey(nombre)) {
@@ -102,30 +109,46 @@ public class PrincipalAgenda {
 	public static void leeFichero() {
 
 		try (BufferedReader br = new BufferedReader(new FileReader("src\\ejercicio7\\Agenda.txt"))) {
-			//array datos
+			// array datos
 			String datos[];
-			//línea donde guardamos la primera línea del fichero
+			// línea donde guardamos la primera línea 1del fichero
 			String linea = br.readLine();
-			//si la línea tiene algo
+			// si la línea tiene algo
 			while (linea != null) {
-				//separamos la línea por espacios y lo guardamos en el array
-				datos = linea.split(" ");
-				//guardamos en el mapa los datos, haciendo un casteo con parseInt del número porque espera un integer en lugar de int
-				agenda.put(datos[0], Integer.parseInt(datos[1]));
-				//pasamos a la siguiente línea y lo guardamos en la variable del mismo nombre
-				linea=br.readLine();
+				// separamos la línea por espacios y lo guardamos en el array
+				datos = linea.split(": ");
+				// guardamos en el mapa los datos, haciendo un casteo con parseInt del número
+				// porque espera un integer en lugar de int
+				agenda.put(datos[0], Long.parseLong(datos[1]));
+				// pasamos a la siguiente línea y lo guardamos en la variable del mismo nombre
+				linea = br.readLine();
 			}
 
 		} catch (FileNotFoundException e) {
-			//crea un fichero vacío en caso de que no exista
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio7\\Agenda.txt", true))) {
-				
-		
-				
+			// crea un fichero vacío en caso de que no exista
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio7\\Agenda.txt", true))) {
+
 			} catch (IOException e1) {
 				System.out.println("No se puede leer el fichero");
 			}
 
+		} catch (IOException e1) {
+			System.out.println("No se puede leer el fichero");
+		}
+
+	}
+
+	public static void escribeFichero() {
+
+		// crea un fichero vacío en caso de que no exista
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\ejercicio7\\Agenda.txt", true))) {
+
+			for (String contacto : agenda.keySet()) {
+				bw.write(contacto + ": " + agenda.get(contacto));
+				 
+			}
+
+			bw.flush();
 		} catch (IOException e1) {
 			System.out.println("No se puede leer el fichero");
 		}
