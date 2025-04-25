@@ -94,6 +94,8 @@ public class PrincipalAgenda {
 
 			// hasta que elijamos salir (opción 4)
 		} while (opcion != 4);
+		//cerramos escaner
+		sc.close();
 	}
 
 	/**

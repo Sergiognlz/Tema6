@@ -59,10 +59,24 @@ public class PrincipalTemperaturas {
 
 			}
 			// caso 2: Mostrar registros
+			case 2 -> {
 
+				muestraFichero();
+
+			}
+			//caso 3: salir
+			case 3->{
+				System.out.println("Saliendo del programa");
+			}
+			//default
+			default->{
+				System.out.println("La opción introducida no existe");
+			}
 			}
 			// repetimos hasta que elijamos la opción 3
 		} while (opcion != 3);
+		//cerramos escaner
+		sc.close();
 	}
 
 	/**
@@ -79,59 +93,60 @@ public class PrincipalTemperaturas {
 		System.out.println("Introduce la opción deseada");
 
 	}
+/**
+ * función que lee el fichero e imprime las líneas, al final imprime el total. Si no existe un fichero lo crea escribiendo en él el encabezado
+ */
+	public static void muestraFichero() {
 
-	public static void leeFichero() {
-		
-		
-	
 		try (BufferedReader br = new BufferedReader(new FileReader("src\\ejercicio8\\RegistroTemperaturas.txt"))) {
 			// array datos
 			String datos[];
 			// línea donde guardamos la primera línea 1del fichero
 			String linea = br.readLine();
-			//variable temperatura máxima y mínima
+			// variable temperatura máxima y mínima
 			int tempMax;
 			int tempMin;
-			
-			int tempMaxTotal=Integer.MIN_VALUE;
-			int tempMinTotal=Integer.MAX_VALUE;
-			
+
+			int tempMaxTotal = Integer.MIN_VALUE;
+			int tempMinTotal = Integer.MAX_VALUE;
+
 			// si la línea tiene algo
 			while (linea != null) {
-				
+
 				// separamos la línea por espacios y lo guardamos en el array
 				datos = linea.split(" ");
-				//imnprimimos línea
+
+				// guardamos los datos casteandolos
+				tempMax = Integer.parseInt(datos[1]);
+				tempMin = Integer.parseInt(datos[2]);
+				// si la temperatura maxima es mayor que la total
+				if (tempMax > tempMaxTotal) {
+					// la guardamos
+					tempMaxTotal = tempMax;
+				}
+				// si la temperatura mínima
+				if (tempMinTotal < tempMin) {
+					// temperatura min total será igual a temperatura mínima
+					tempMinTotal = tempMin;
+				}
+
+				// imnprimimos línea
 				System.out.println(linea);
-				//guardamos los datos casteandolos 
-				tempMax=Integer.parseInt(datos[1]);
-				tempMin=Integer.parseInt(datos[2]);
-				//si la temperatura maxima es mayor que la total
-				if(tempMax>tempMaxTotal) {
-					//la guardamos
-					tempMaxTotal=tempMax;
-				}
-				//si la temperatura mínima 
-				if(tempMinTotal<tempMin) {
-					//temperatura min total será igual a temperatura mínima
-					tempMinTotal=tempMin;
-				}
-				
-				
 				// pasamos a la siguiente línea y lo guardamos en la variable del mismo nombre
 				linea = br.readLine();
 			}
-			
+			System.out.println("Temperatura Máxima: " + tempMaxTotal);
+			System.out.println("Temperatura Mínima: " + tempMinTotal);
 
 		} catch (FileNotFoundException e) {
-			//si no existe el fichero lo creará
+			// si no existe el fichero lo creará
 			try (BufferedWriter bw = new BufferedWriter(
 					new FileWriter("src\\ejercicio8\\RegistroTemperaturas.txt", true))) {
-				//escribirá el encabezado
+				// escribirá el encabezado
 				bw.write("Fecha" + " - " + "Temperatura Máxima" + " - " + "Temperatura Mínima");
 
 			} catch (IOException e1) {
-				
+
 				System.out.println("Error al leer el fichero");
 			}
 		} catch (IOException e) {
@@ -140,6 +155,13 @@ public class PrincipalTemperaturas {
 
 	}
 
+	/**
+	 * función que escribe en el fichero los datos que le pasamos por parámetro
+	 * 
+	 * @param fecha
+	 * @param tempMax
+	 * @param tempMin
+	 */
 	public static void escribeFichero(String fecha, int tempMax, int tempMin) {
 
 		try (BufferedWriter bw = new BufferedWriter(
