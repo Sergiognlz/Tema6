@@ -113,7 +113,7 @@ public class PrincipalTemperaturas {
 				}
 				//si la temperatura mínima 
 				if(tempMinTotal<tempMin) {
-					//temp
+					//temperatura min total será igual a temperatura mínima
 					tempMinTotal=tempMin;
 				}
 				
@@ -124,12 +124,14 @@ public class PrincipalTemperaturas {
 			
 
 		} catch (FileNotFoundException e) {
+			//si no existe el fichero lo creará
 			try (BufferedWriter bw = new BufferedWriter(
 					new FileWriter("src\\ejercicio8\\RegistroTemperaturas.txt", true))) {
-
+				//escribirá el encabezado
 				bw.write("Fecha" + " - " + "Temperatura Máxima" + " - " + "Temperatura Mínima");
 
 			} catch (IOException e1) {
+				
 				System.out.println("Error al leer el fichero");
 			}
 		} catch (IOException e) {
