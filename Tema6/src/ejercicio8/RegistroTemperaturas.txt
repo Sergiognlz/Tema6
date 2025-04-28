@@ -1,0 +1,4 @@
+Fecha - Temperatura Máxima - Temperatura Mínima
+13-09-1987 32 21
+28-04-2025 29 14
+25-12-2003 35 -10
